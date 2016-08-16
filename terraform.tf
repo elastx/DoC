@@ -5,14 +5,27 @@ variable "password" {}
 variable "user_name" {}
 variable "tenant_name" {}
 
-# A little bit hackish, but for demo purposes; why not
-variable "cloudconfig_default_user" {
+variable "cloudconfig_server" {
   type = "string"
   default = <<EOF
 #cloud-config
-system_info:
-  default_user:
-    name: elastx
+rancher:
+  services:
+    rancher-server:
+      image: rancher/server
+      privileged: true
+      restart: always
+      ports:
+        - "8080:8080"
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+EOF
+}
+
+variable "cloudconfig_agent" {
+  type = "string"
+  default = <<EOF
+#cloud-config
 EOF
 }
 
@@ -23,7 +36,7 @@ variable "ops_image" {
 
 variable "ops_flavor" {
   type = "string"
-  default = "m1.tiny"
+  default = "m1.xsmall"
 }
 
 
@@ -144,6 +157,7 @@ resource "openstack_compute_instance_v2" "rserver_cluster" {
   count = "1"
   image_name = "${var.ops_image}"
   flavor_name = "${var.ops_flavor}"
+  config_drive = "true"
   network = { 
     uuid = "${openstack_networking_network_v2.rancher_net.id}"
   }
@@ -153,7 +167,7 @@ resource "openstack_compute_instance_v2" "rserver_cluster" {
     group = "${openstack_compute_servergroup_v2.rserver_srvgrp.id}"
   }
   security_groups = ["${openstack_compute_secgroup_v2.rserver_sg.name}","${openstack_compute_secgroup_v2.rall_sg.name}"]
-  user_data = "${var.cloudconfig_default_user}"
+  user_data = "${var.cloudconfig_server}"
 }
 
 output "rserver-instances" {
@@ -172,6 +186,7 @@ resource "openstack_compute_instance_v2" "ragent_cluster" {
   count = "1"
   image_name = "${var.ops_image}"
   flavor_name = "${var.ops_flavor}"
+  config_drive = "true"
   network = { 
     uuid = "${openstack_networking_network_v2.rancher_net.id}"
   }
@@ -180,7 +195,7 @@ resource "openstack_compute_instance_v2" "ragent_cluster" {
     group = "${openstack_compute_servergroup_v2.ragent_srvgrp.id}"
   }
   security_groups = ["${openstack_compute_secgroup_v2.ragent_sg.name}","${openstack_compute_secgroup_v2.rall_sg.name}"]
-  user_data = "${var.cloudconfig_default_user}"
+  user_data = "${var.cloudconfig_agent}"
 }
 
 output "ragent-instances" {
