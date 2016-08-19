@@ -1,42 +1,66 @@
-# Terraform Demo
+# Day of Containers 2016
+# Build you own CaaS
 
-This is just a quickstart for using terraform on Elastx. It creates:
-
-| \# | Resource |
-|----|----------|
-1 | Router
-2 | Subnets, web and db
-4 | instances, 2 web, 2 db
-2 | floating IPs for web cluster
-2 | Server Groups with anti-affiniy (web, db) makes sure instances aren't on same physical hardware
-3 | Security Groups "wk-ssh-sg", "wk-web-sg" and "wk-db-sg"
-1 | Key pair "demo\_rsa"
-
-Default user is changed to "elastx" with cloud-config.
-
-## File structure
-| Name | Description |
-|------|-------------|
-README.md | This file, obviously
-demo\_rsa(\|\\.pub) | SSH keypair, only to be used for this demonstration
-terraform.tf | The terraform manifest with all defined resources
-terraform-openrc.sh | should be run initially to setup username, tenant and password
-terraform.tfstate(\|\\.backup) | tfstate and tfstate.backup so that terraform can keep track on changes
+During this session we will install Rancher using Terraform on top of Openstack.
 
 
-## How to use
+PREP:
+1. Get your Openstack credentials
 
-Make sure you have installed [Terraform](https://www.terraform.io/)
+2. Install Terraform https://www.terraform.io/downloads.html
 
-First off, run the terraform-openrc.sh script. It will ask about username, tenant and password. Then run "terraform plan". If that fails, make sure you've used the correct credentials (runt terraform-openrc.sh again)
+3. Clone this repo
 
-Last, "terraform apply" will install
+4. Test you credential by loggin in to the Openstack GUI https://ops.elastx.net
 
-```bash
-$ . ./terraform-openrc.sh
-[...]
-$ terraform plan
-$ terraform apply
-```
+5. Add you credentials to terraform-openrc.sh
 
-You should now have a fully working environment with everything described in the beginning of this README.
+
+
+DEPLOY:
+1. Source the cretentials
+# cd /path/to/DoC
+# . ./terraform-openrc.sh
+
+2. See what Terraform is planning to do
+# /path/to/terraform plan
+
+3. Deploy 
+# /path/to/terraform apply
+
+
+
+RANCHEROS
+1. Check what public IP the rserver instance has
+# /path/to/terraform output
+
+2. Log in to the rserver-1 instanse that is running rancheros
+# ssh -i demo_rsa rancher@YOUR_IP_ADDRESS
+
+3. Check user containers
+# sudo docker ps
+
+4. Check system containers
+# sudo system-docker ps
+
+5. Check version
+# sudo os -v
+
+6. List available OS versions
+# sudo ros os list
+
+7. If yout want to upgrade you can run
+# sudo ros upgrade
+
+8. You will find system and docker logs here
+# sudo ls -l /var/log
+
+
+RANCHER PREP
+
+1. Open the Rancher UI in the web browser. You can find the URL if you run
+# /path/to/terraform output rserver-url
+
+2. Select "Add Host" > click "Save" > click on the link "Manage available machine drivers" > Active Openstack
+
+3. Go to "INFRASTRUCTURE" > "Hosts" > "Add host" > "Other"

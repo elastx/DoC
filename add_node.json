@@ -1,0 +1,32 @@
+{
+  "type": "machine",
+  "name": "ragent",
+  "openstackConfig": {
+    "type": "openstackConfig",
+    "activeTimeout": "200",
+    "authUrl": "https://ops.elastx.net:5000/v2.0",
+    "availabilityZone": "",
+    "domainId": "",
+    "domainName": "",
+    "endpointType": "",
+    "flavorId": "",
+    "flavorName": "m1.small",
+    "floatingipPool": "ext-net-01",
+    "imageId": "",
+    "imageName": "coreos-1068.8.0",
+    "ipVersion": "4",
+    "keypairName": "demo-keypair",
+    "netId": "",
+    "netName": "rancher-net",
+    "password": "lab1",
+    "novaNetwork": false,
+    "privateKeyFile": "/.ssh/demo_rsa",
+    "region": "",
+    "secGroups": "rall-sg,ragent-sg",
+    "sshPort": "22",
+    "sshUser": "core",
+    "tenantId": "",
+    "tenantName": "lab1",
+    "username": "lab1"
+  }
+}
