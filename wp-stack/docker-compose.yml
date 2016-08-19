@@ -1,0 +1,10 @@
+db:
+  environment:
+    MYSQL_ROOT_PASSWORD: example
+  image: mariadb
+wordpress:
+  ports:
+  - 80:80/tcp
+  image: wordpress
+  links:
+  - db:mysql

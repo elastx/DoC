@@ -64,3 +64,6 @@ RANCHER PREP
 2. Select "Add Host" > click "Save" > click on the link "Manage available machine drivers" > Active Openstack
 
 3. Go to "INFRASTRUCTURE" > "Hosts" > "Add host" > "Other"
+
+4. You could enter all required infomration here but instead you can run
+# ./add_node.sh
