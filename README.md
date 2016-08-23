@@ -32,7 +32,8 @@ RANCHEROS
 1. Check what public IP the rserver instance has
 # /path/to/terraform output
 
-2. Log in to the rserver-1 instanse that is running rancheros
+2. Log in to the rserver-1 instanse that is running rancheros but first fix the key file permissions
+# chmod 600 demo_rsa
 # ssh -i demo_rsa rancher@YOUR_IP_ADDRESS
 
 3. Check user containers
@@ -42,12 +43,12 @@ RANCHEROS
 # sudo system-docker ps
 
 5. Check version
-# sudo os -v
+# sudo ros -v
 
 6. List available OS versions
 # sudo ros os list
 
-7. If yout want to upgrade you can run
+7. If you want to upgrade you can run
 # sudo ros upgrade
 
 8. You will find system and docker logs here
@@ -61,11 +62,74 @@ RANCHER PREP
 
 2. Select "Add Host" > click "Save" > click on the link "Manage available machine drivers" > Active Openstack
 
-3. Go to "INFRASTRUCTURE" > "Hosts" > "Add host" > "Other"
 
-4. You could enter all required infomration here but instead look at the file below and then run it.
+RANCHER ADD HOSTS
+1. Go to "INFRASTRUCTURE" > "Hosts" > "Add host" > "Other"
+Either enter all the information here to add a node or we could use the api with a script we prepared see point 2.
+
+2. Use the below script to add a host usinmg the API.
 # less add_node.sh
+# less add_node.json
 # ./add_node.sh
 
-RANCHER
+3. Add two additional nodes using Terraform
+In the web UI go to "INFRASTRUCTURE" > "Hosts" > "Add host" > "Custom" and copy the auth string at the end of the URL after http://192.121.20.142:8080/v1/scripts/COPY_THIS
+Edit the vars.tf file and change "ragent_count" to "3" and paste the string you just copied in to "registrationtoken" variable.
+
+DEPLOY AND TEST STACK 
+1. In the GUI go to "CATALOG" > "Worpress" > "Launch"
+
+2. Access the workpress site when done and also check where the containers are located.
+
+3. Log on to the host where the wordpress container is running and force remove the container.
+# ssh -i demo_rsa core/rancher@HOST_IP
+# docker ps
+# docker rm -f CONTAINER_ID
+
+4. Check what happens with the container
+
+DEPLOY AND TEST STACK AGAIN 
+1. Download the Rancher CLI, you will find the download link in the bottom right corner in the Rancher GUI
+
+2. Generate API keys
+In the GUI go to "API" > "Add Environment API Key"
+
+3. Set environment variables to make it easy to run the CLI
+#  . rancher-openrc.sh
+
+4. Deploy a Wordpress stack with the CLI
+# cd wp-stack
+# /path/to/rancher-compose up
+When the stack is up you can do ctrl-c to stop the log output
+
+5. Check where the wp-stack wordpress container is running and shutdown that host.
+Log in to the Openstack GUI and go to "Compute" > "Instances" > select "Shut of instance" in the instance drop down meny 
+
+6. Check the result in Rancher
+
+7. Start the instance again and check what happens
+
+8. Do the same on the host that is running the workpress stack wordpress container.
+
+9. Check the results
+
+
+MISC RANCHER TASKS
+1. Add a load balancer to a stack
+
+2. Enable access control
+
+3. Add a label on a host
+
+4. Add a container that must run on the host with the label you just configured
+
+5. Open a container shell in the GUI
+
+6. Upgrade a container and then do a roleback
+
+
+RUN OTHER FRAMEWORKS
+1. Remove all the current stacks and containers.
+
+2. Edit the default envrionment under "Manage environments" and select the framwork that you would like to test
 

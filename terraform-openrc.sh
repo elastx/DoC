@@ -1,5 +1,5 @@
 #
-# Run this before running terraform commands
+# Source this before running terraform commands
 #
 echo -n "Please enter your username: "
 read -r OS_USERNAME_INPUT

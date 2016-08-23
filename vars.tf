@@ -10,7 +10,7 @@ variable "ragent_count" {
 
 variable "registrationtoken" {
   type = "string"
-  default = "2ADE1DE9B955FC8E1595:1471532400000:YDPdQ6BYLoBnfejy93ytkWss"
+  default = "ADD_YOUR:TOKEN:HERE"
 }
 
 variable "ops_image" {

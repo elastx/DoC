@@ -18,7 +18,7 @@
     "keypairName": "demo-keypair",
     "netId": "",
     "netName": "rancher-net",
-    "password": "lab1",
+    "password": "kkpulsa",
     "novaNetwork": false,
     "privateKeyFile": "/.ssh/demo_rsa",
     "region": "",

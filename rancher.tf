@@ -35,7 +35,7 @@ resource "openstack_compute_secgroup_v2" "ragent_sg" {
   description = "rancher agent security group"
   rule {
     from_port = 80
-    to_port = 80
+    to_port = 89
     ip_protocol = "tcp"
     cidr = "0.0.0.0/0"
   }
