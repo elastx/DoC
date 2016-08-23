@@ -5,7 +5,7 @@ variable "rserver_count" {
 
 variable "ragent_count" {
   type = "string"
-  default = "1"
+  default = "0"
 }
 
 variable "registrationtoken" {
@@ -20,6 +20,6 @@ variable "ops_image" {
 
 variable "ops_flavor" {
   type = "string"
-  default = "m1.small"
+  default = "m1.small.doc"
 }
 

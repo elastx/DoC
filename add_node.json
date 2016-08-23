@@ -10,7 +10,7 @@
     "domainName": "",
     "endpointType": "",
     "flavorId": "",
-    "flavorName": "m1.small",
+    "flavorName": "m1.small.doc",
     "floatingipPool": "ext-net-01",
     "imageId": "",
     "imageName": "coreos-1068.8.0",

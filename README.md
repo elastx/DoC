@@ -10,11 +10,9 @@ PREP:
 2. Install Terraform https://www.terraform.io/downloads.html
 
 3. Clone this repo
+git@github.com:elastx/DoC.git
 
 4. Test you credential by loggin in to the Openstack GUI https://ops.elastx.net
-
-5. Add you credentials to terraform-openrc.sh
-
 
 
 DEPLOY:
@@ -65,5 +63,9 @@ RANCHER PREP
 
 3. Go to "INFRASTRUCTURE" > "Hosts" > "Add host" > "Other"
 
-4. You could enter all required infomration here but instead you can run
+4. You could enter all required infomration here but instead look at the file below and then run it.
+# less add_node.sh
 # ./add_node.sh
+
+RANCHER
+
