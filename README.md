@@ -17,7 +17,9 @@ git@github.com:elastx/DoC.git
 
 ## DEPLOY:
 1. Source the cretentials
+
 `cd /path/to/DoC`
+
 `. ./terraform-openrc.sh`
 
 2. See what Terraform is planning to do
