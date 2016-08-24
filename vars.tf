@@ -10,7 +10,7 @@ variable "ragent_count" {
 
 variable "registrationtoken" {
   type = "string"
-  default = "ADD_YOUR:TOKEN:HERE"
+  default = "EGISTRATIONTOKEN
 }
 
 variable "ops_image" {
