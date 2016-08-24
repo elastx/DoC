@@ -13,7 +13,7 @@
     "flavorName": "m1.small.doc",
     "floatingipPool": "ext-net-01",
     "imageId": "",
-    "imageName": "coreos-1068.8.0",
+    "imageName": "coreos-1068.10.0",
     "ipVersion": "4",
     "keypairName": "demo-keypair",
     "netId": "",
