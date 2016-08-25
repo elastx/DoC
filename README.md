@@ -144,7 +144,7 @@ When the stack is up you can do ctrl-c to stop the log output
 
 5. Check where the wp-stack wordpress container is running and shutdown that host.
 
-Log in to the Openstack GUI and go to "Compute" > "Instances" > select "Shut of instance" in the instance drop down meny 
+Log in to the Openstack GUI and go to "Compute" > "Instances" > select "Shut Off instance" in the instance drop down meny 
 
 6. Check the result in Rancher
 
